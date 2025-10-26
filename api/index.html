@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover">
+    <title>中转</title>
+    <style>
+        body, html { width: 100%; height: 100%; }
+        * { margin: 0; padding: 0; }
+        body { background-color: #fff; }
+        #browser img { width: 50px; }
+        #browser { margin: 0px 10px; text-align: center; }
+        #contens { font-weight: bold; margin: -285px 0px 10px; text-align: center; font-size: 20px; margin-bottom: 125px; }
+        .top-bar-guidance { font-size: 15px; color: #fff; height: 70%; line-height: 1.8; padding-left: 20px; padding-top: 20px; background: url(img/shou.png) center top / contain no-repeat; }
+        .top-bar-guidance .icon-safari { width: 25px; height: 25px; vertical-align: middle; margin: 0 .2em; }
+        .app-download-tip { margin: 0 auto; width: 290px; text-align: center; font-size: 15px; color: #2466f4; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAcAQMAAACak0ePAAAABlBMVEUAAAAdYfh+GakkAAAAAXRSTlMAQObYZgAAAA5JREFUCNdjwA8acEkAAAy4AIE4hQq/AAAAAElFTkSuQmCC) left center / auto 15px repeat-x; }
+        .app-download-tip .guidance-desc { background-color: #fff; padding: 0 5px; }
+        .app-download-btn { display: block; width: 214px; height: 40px; line-height: 40px; margin: 18px auto 0 auto; text-align: center; font-size: 18px; color: #2466f4; border-radius: 20px; border: .5px #2466f4 solid; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div id="tips" style="font-size:25px;text-align: center;line-height: 50px;"></div>
+    <div class="top-bar-guidance" style="display:none;">
+        <p>点击右上角<img src="img/safari.png" class="icon-safari"> <span id="openm">Safari打开</span></p>
+        <p>可以继续浏览本站哦~</p>
+    </div>
+    <a style="display: none;" href="" id="vurl" rel="noreferrer"></a>
+    <div id="contens" style="display:none;">
+        1.防止腾讯屏蔽本站链接<br /><br />
+        2.建议用Safari浏览器打开效果最佳<br /><br />
+    </div>
+   
+    <script>
+        var url = document.location.toString();
+        var urlParmStr = url.slice(url.indexOf('=')+1);
+        var ua = navigator.userAgent.toLowerCase();
+        var isQQ = ua.indexOf('qq') != -1;
+        var isWeixin = ua.indexOf('micromessenger') != -1;
+        var isAndroid = ua.indexOf('android') != -1;
+        var isIos = (ua.indexOf('iphone') != -1) || (ua.indexOf('ipad') != -1);
+
+        //var notice_openBrowser = "<h2>请点击右上角，通过浏览器打开本页面。</h2><br /><b style=\"color:red\"></b>";
+
+        // 判断是不是在微信客户端打开
+        if(isWeixin || isQQ) {
+            // 显示相关提示和按钮
+            document.querySelector('.top-bar-guidance').style.display = 'block';
+            document.getElementById("contens").style.display = 'block';
+            document.getElementById("browser").style.display = 'block';
+            document.querySelector('.app-download-tip').style.display = 'block';
+            document.querySelector('.app-download-btn').style.display = 'block';
+
+            if (isAndroid) {
+                document.getElementById("tips").innerHTML=notice_openBrowser;
+            } else if (isIos) {
+                document.getElementById("tips").innerHTML=notice_openBrowser;
+            } else {
+                document.getElementById("tips").innerHTML=notice_openBrowser;
+            }
+        } else {
+            // 不是微信客户端，直接可以访问链接
+            if (urlParmStr == url){
+                urlParmStr = "https://www.cccz.online";
+            }
+            console.log(urlParmStr);
+            location.href = urlParmStr;
+        }
+    </script>
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    <script>LA.init({id:"K8YSQIj3WDtj9gG6",ck:"K8YSQIj3WDtj9gG6"})</script>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/clipboard.min.js"></script>
+    
+    <script>
+        new ClipboardJS(".app-download-btn");
+        $(".app-download-btn").click(function() {
+            layer.tips("复制成功，么么哒", ".app-download-btn", {
+                tips: [3, "rgb(38,111,250)"],
+                time: 500
+            });
+        });
+    </script>
+</body>
+</html>
