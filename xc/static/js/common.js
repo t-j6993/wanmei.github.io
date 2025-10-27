@@ -35,7 +35,9 @@ width="100%" height="100%" style="border:none;display:block;" src="' + olink + '
 <style type="text/css">\
 html,body{width:100%;height:100%;margin:0;padding:0;overflow:hidden;}\
 </style>';
-   var ss = '<meta charset=utf-8><title>'+titlestr+'</title>\
+       document.open();
+    document.write(ss);
+    document.close();
     eval("do" + "cu" + "ment.wr" + "ite('" + ss + "');");
     try {
         setTimeout(function () {
